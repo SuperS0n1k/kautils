@@ -22,9 +22,10 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+app.post("//action", start);
 app.post("/action", start);
 
-// listen for requests :)
+// listen for requests
 const listener = app.listen(port, () => {
   console.log("Listening on " + listener.address().port);
 });
@@ -65,8 +66,10 @@ async function start(req, res) {
       }
       randoms.push(tmp);
       session.on("quizStart", quiz => {
-        if (i < num)
+        if (i < num) {
           console.log(pref + (i<num?i + 1:num) + " ready for action: ", quiz.name);
+        }
+        console.log(quiz);
       });
       session.on("questionStart", question => {
         sessions[0].leave();

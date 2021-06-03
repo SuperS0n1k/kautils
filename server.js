@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.post("/new", start);
+app.post("/action", start);
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {

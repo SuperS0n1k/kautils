@@ -1,6 +1,6 @@
 # KaUtils
 Easy to use kahoot.js flooder. 
-[Click here](https://dikahdoff.github.io/kautils/)
+[Click here](https://apps.bisquit.me/kautils)
 
 Use the above link to use the website without hosting it yourself.
 # Setting it up for yourself

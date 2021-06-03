@@ -1,5 +1,4 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
+<!-- Served from your routes in server.js -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,13 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Kahoot Flooder & other fun things">
     <link id="favicon" rel="icon" href="/favicon.ico" type="image/x-icon">
-
-    <!-- import the webpage's stylesheet -->
     <style>
       * {
         box-sizing: border-box;
       }
-
       body {
         background-color: black;
         color: white;
@@ -23,18 +19,15 @@
         margin: 2em 1em;
         line-height: 1.5em;
       }
-
       a:link {
         color: rgb(121, 83, 255);
       }
-
       h1 {
         font-style: bold;
         color: #6268ff;
         max-width: calc(100% - 5rem);
         line-height: 1.1;
       }
-
       form {
         background-color: #333;
         display: grid;
@@ -42,7 +35,6 @@
         padding: 1em;
         max-width: 40ch;
       }
-
       input {
         border: 1px solid silver;
         display: block;
@@ -51,7 +43,6 @@
         padding: 5px;
         width: 100%;
       }
-
       form button {
         background-color: #b13737;
         color: white;
@@ -63,35 +54,29 @@
         padding: 0.25em 1em;
         max-width: 20ch;
       }
-
       form button:hover {
         background-color: lavender;
       }
-
       footer {
         margin-top: 3em;
         padding-top: 1.5em;
         border-top: 1px solid lightgrey;
       }
     </style>
-
-    <!-- import the webpage's client-side javascript file -->
-    <script src="/script.js" defer></script>
   </head>
   <body>
     <header>
       <h1>KaUtils</h1>
       <h3>fork by <a href="https://github.com/dikahdoff/kautils/">dikahdoff</a></h3>
     </header>
-
     <main>
       <form method="POST" action="./action">
-          <input name="dream" type="number" maxlength="100" required placeholder="Game PIN">
+          <input name="id" type="number" maxlength="100" required placeholder="Game PIN">
           <input name="num" type="number" maxlength="4" required placeholder="Amount of Bots">
+          <input name="prefix" type="text" maxlength="32" required placeholder="Name prefix">
         <button type="submit">Flood</button>
       </form>
     </main>
-
     <footer>Make sure the tab doesn't get suspended while flooding.
       <br>
       GitHub <a href="https://github.com/dikahdoff/kautils/">Repo</a> with instructions to setup yourself!

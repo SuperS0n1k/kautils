@@ -8,16 +8,14 @@
 const Kahoot = require("kahoot.js-updated");
 const express = require("express");
 const app = express();
+const port = 6430;
 var randoms = [];
 let tmp = [1];
 for (let i = 0; i < 100000; i++) {
   tmp.push(Math.random());
 }
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
@@ -27,27 +25,35 @@ app.get("/", (req, res) => {
 app.post("/action", start);
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+const listener = app.listen(port, () => {
+  console.log("Listening on " + listener.address().port);
 });
 
 async function start(req, res) {
   let keepplaying = true;
-  let id = +req.body.dream || 0;
+  console.log(req.body);
+  let id = +req.body.id || 0;
   let num = +req.body.num || 1;
+  var pref = "human";
+  if(req.body.prefix != null) {
+    pref = req.body.prefix;
+  }
   if (typeof id != "number" || typeof num != "number") {
     res.send("NaN");
     return;
   }
   if (!(id >= 100000 || id <= 9999999)) {
-    res.send("not valid id");
+    res.send("Not valid PIN");
     return;
   }
   if (num < 0 || num > 2000) {
-    res.send("too many bots! cap is 2000");
+    res.send("Too many Bots! Cap is 2000");
     return;
   }
-
+  if(pref.length < 1 || pref.length > 24) {
+    res.send("Prefix too long! Cap is 24 characters");
+    return;
+  }
   let sessions = [];
   for (let i = 0; i < num + 1; i++) {
     sessions.unshift(new Kahoot());
@@ -58,10 +64,9 @@ async function start(req, res) {
         tmp.push(Math.random());
       }
       randoms.push(tmp);
-
       session.on("quizStart", quiz => {
         if (i < num)
-          console.log("i like ya cut g " + (i<num?i + 1:"haha") + " ready for action: ", quiz.name);
+          console.log(pref + (i<num?i + 1:num) + " ready for action: ", quiz.name);
       });
       session.on("questionStart", question => {
         sessions[0].leave();
@@ -110,20 +115,20 @@ async function start(req, res) {
         keepplaying = false;
       });
       session.on("joined", () => {
-        if (i < num) console.log("bot " + (i<num?i + 1:"tmp") + " reporting for duty");
+        if (i < num) console.log(pref + (i<num?i + 1:"tmp") + " reporting for duty");
         y(true);
       });
       session.on("invalidName", () => {
         n(true);
       });
-      session.join(id, "1992 space movie " + (i<num?i + 1:"haha"), "bot gang");
+      session.join(id, pref + (i<num?i + 1:num), "bot gang");
     }).catch(err => {
       res.send(err);
       return;
     });
   }
   await sleep(1000);
-  res.send("done!");
+  // Done
   await new Promise(r => {
     setTimeout(_ => {
       if (!keepplaying) {
@@ -133,11 +138,9 @@ async function start(req, res) {
   });
   console.log("end");
 }
-
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 function random(arr, rand) {
   return arr[Math.floor(rand * arr.length)];
 }

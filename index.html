@@ -4,35 +4,97 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>kahoot flooder dashboard</title>
+    <title>KaUtils</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="cool flooder thing">
+    <meta name="description" content="Kahoot Flooder & other fun things">
     <link id="favicon" rel="icon" href="/favicon.ico" type="image/x-icon">
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="public/style.css">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: black;
+        color: white;
+        font-family: sans-serif;
+        margin: 2em 1em;
+        line-height: 1.5em;
+      }
+
+      a:link {
+        color: rgb(121, 83, 255);
+      }
+
+      h1 {
+        font-style: bold;
+        color: #6268ff;
+        max-width: calc(100% - 5rem);
+        line-height: 1.1;
+      }
+
+      form {
+        background-color: #333;
+        display: grid;
+        grid-gap: 1em;
+        padding: 1em;
+        max-width: 40ch;
+      }
+
+      input {
+        border: 1px solid silver;
+        display: block;
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding: 5px;
+        width: 100%;
+      }
+
+      form button {
+        background-color: #b13737;
+        color: white;
+        border: 2px solid currentColor;
+        border-radius: .25em;
+        cursor: pointer;
+        font-size: inherit;
+        line-height: 1.4em;
+        padding: 0.25em 1em;
+        max-width: 20ch;
+      }
+
+      form button:hover {
+        background-color: lavender;
+      }
+
+      footer {
+        margin-top: 3em;
+        padding-top: 1.5em;
+        border-top: 1px solid lightgrey;
+      }
+    </style>
 
     <!-- import the webpage's client-side javascript file -->
     <script src="/script.js" defer></script>
   </head>
   <body>
     <header>
-      <h1>kahoot bot flooder console</h1>
+      <h1>KaUtils</h1>
+      <h3>fork by <a href="https://github.com/dikahdoff/kautils/">dikahdoff</a></h3>
     </header>
 
     <main>
       <form method="POST" action="/new">
-          <input name="dream" type="number" maxlength="100" required placeholder="kahoot code">
-          <input name="num" type="number" maxlength="2" required placeholder="number of bots">
-        <button type="submit">flood</button>
+          <input name="dream" type="number" maxlength="100" required placeholder="Game PIN">
+          <input name="num" type="number" maxlength="4" required placeholder="Amount of Bots">
+        <button type="submit">Flood</button>
       </form>
     </main>
 
-    <footer>REMINDER! BOTS CAN ONLY BE USED ON A PIN 1 TIME! ALSO KEEP THIS TAB OPEN WHILE FLOODING
+    <footer>Make sure the tab doesn't get suspended while flooding.
       <br>
-      Github <a href="https://github.com/yeetedmeme/kaspammer">repo</a> with instructions to setup yourself!
-      <br>
-      My <a href="https://twitter.com/yeetedmeme">Twitter</a>!</footer>
+      GitHub <a href="https://github.com/dikahdoff/kautils/">Repo</a> with instructions to setup yourself!
+    </footer>
   </body>
 </html>

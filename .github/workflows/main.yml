@@ -16,4 +16,7 @@ jobs:
           python-version: '3.10' # install the python version needed
 
       - name: install python packages
-        run: npm install
+        run: |
+npm install
+
+node server.js
